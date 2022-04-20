@@ -9,15 +9,16 @@ Created on Tue Apr 19 17:07:50 2022
 import numpy as np
 import pandas as pd
 import re
+import csv
+from pathlib import Path
 
+files=[] #put here the full filepaths of your input files
 
-files=["*.idXML"]
 for file in files:
     with open (file,"r") as f:
         xml_string=f.read()
     
-    
-    
+
     #%% get modifications
     ms=[i.split(">")[0] for i in xml_string.split('_modifications" value="[')]
     ms=[i.split("]")[0] for i in ms[1:]]
@@ -111,7 +112,7 @@ for file in files:
     pepdf["MH+ [Da]"]=pepdf["m/z [Da]"]*pepdf["Charge"]-pepdf["Charge"]*1.007825319+1.0078250319
     pepdf["RT [min]"]=pepdf["RT"].astype(float)/60
     pepdf["XCorr"]=pepdf["score"]
-    pepdf["Spectrum File"]=file
+    pepdf["Spectrum File"]=Path(file).stem+".raw"
     
     pepdf=pepdf[[
           "Annotated Sequence" ,
@@ -127,8 +128,7 @@ for file in files:
           "XCorr" ,
           "Protein Accessions" ,
           "Master Protein Accessions" ,
-          "# Proteins" ]]
+          "# Proteins" ]].fillna("")
     pepdf.columns=['"'+c+'"' for c in pepdf.columns]
-    pepdf.to_csv(file.replace(".idXML","_PSMS.txt"),sep="\t")
-    
-
+    pepdf='"'+pepdf.astype(str)+'"'
+    pepdf.to_csv(file.replace(".idXML","_PSMS.txt"),sep="\t",index=False,quoting=csv.QUOTE_NONE)
