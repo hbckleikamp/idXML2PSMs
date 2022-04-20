@@ -12,7 +12,6 @@ import re
 
 
 files=["*.idXML"]
-
 for file in files:
     with open (file,"r") as f:
         xml_string=f.read()
@@ -129,5 +128,7 @@ for file in files:
           "Protein Accessions" ,
           "Master Protein Accessions" ,
           "# Proteins" ]]
-    
+    pepdf.columns=['"'+c+'"' for c in pepdf.columns]
     pepdf.to_csv(file.replace(".idXML","_PSMS.txt"),sep="\t")
+    
+
