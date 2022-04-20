@@ -110,7 +110,7 @@ for file in files:
     pepdf["Charge"]=pepdf["charge"].astype(int)
     pepdf["m/z [Da]"]=pepdf["MZ"].astype(float)
     pepdf["MH+ [Da]"]=pepdf["m/z [Da]"]*pepdf["Charge"]-pepdf["Charge"]*1.007825319+1.0078250319
-    pepdf["RT [min]"]=pepdf["RT"]/60
+    pepdf["RT [min]"]=pepdf["RT"].astype(float)/60
     pepdf["XCorr"]=pepdf["score"]
     pepdf["Spectrum File"]=file
     
