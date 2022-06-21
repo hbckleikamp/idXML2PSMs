@@ -5,3 +5,7 @@ single python script to convert .idXML files to PMSs format, which is generated 
 Script was designed to be run in Spyder 5.15 <br>
 The variable 'files' should be edited to contain the full filepaths of the files that need to be processed. <br>
 outputs are written to the directory of the input files.
+
+<br>There are two script versions, one where modifications are listed in the idXML file with a delimiter '_modifications', and one where modifications of unknown masses are matched to unimod. 
+
+
