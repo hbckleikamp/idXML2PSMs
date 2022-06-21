@@ -21,7 +21,7 @@ from pathlib import Path
 from inspect import getsourcefile
 import pandas as pd
 import numpy as np
-
+import csv
 #%% Inputs
     
 
@@ -147,9 +147,26 @@ for idxfile in idxfiles:
     pepdf["Spectrum File"]=Path(idxfile).stem+".raw"
     
     
+
     
-    #for this specific diamond pipeine
     
+
     
-    #pepdf["Peptide"]=pepdf["Annotated Sequence"]
-    pepdf.to_csv("target_"+Path(idxfile).stem+".csv")
+    pepdf=pepdf[[
+          "Annotated Sequence" ,
+          "Confidence"    ,
+          "PSM Ambiguity" ,
+          "Modifications" ,
+          "First Scan",
+          "Spectrum File"  ,
+          "Charge" ,
+          "m/z [Da]" ,
+          "MH+ [Da]" ,
+          "RT [min]" ,
+          "XCorr" ,
+          "Protein Accessions" ,
+          "Master Protein Accessions" ,
+          "# Proteins" ]].fillna("")
+    pepdf.columns=['"'+c+'"' for c in pepdf.columns]
+    pepdf='"'+pepdf.astype(str)+'"'
+    pepdf.to_csv(idxfile.replace(".idXML","_PSMS.txt"),sep="\t",index=False,quoting=csv.QUOTE_NONE)
