@@ -120,7 +120,7 @@ for idxfile in idxfiles:
     mods["sequence_index"]=mods["sequence_index"]-1
     mods.loc[mods["sequence_index"]==-1,"sequence_index"]=0
     for index,i in mods.iterrows():
-        pepdf["Annotated_Sequence"].iloc[i["peptide_index"]]=pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][:i["sequence_index"]]+ pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][i["sequence_index"]].lower()+ pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][i["sequence_index"]:]
+        pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][0:i["sequence_index"]]+pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][i["sequence_index"]].lower()+pepdf["Annotated_Sequence"].iloc[i["peptide_index"]][(i["sequence_index"]+1):]
     
     
     
