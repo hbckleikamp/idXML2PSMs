@@ -30,11 +30,11 @@ std_aa_mass = {'G': 57.02146, 'A': 71.03711, 'S': 87.03203, 'P': 97.05276, 'V': 
                'M': 131.04049,'H': 137.05891,'F': 147.06841,'U': 150.95364,'R': 156.10111,
                'Y': 163.06333,'W': 186.07931,'O': 237.14773}  
 
-idxfiles=["D:/Analysis_Paola1/MsFragger/Uniref30/C6_1_JSP_JLN_UPLIFT.pepXML"] #input idxml files
+idxfiles=[] #input pepxml files
 
 #%% Read modifications
 
-mfile="C:/Comet/Databases/Modifications/unimod.txt"
+mfile="path/to/unimod.txt"
 with open(mfile,"r") as f:
     m=f.read()
 
